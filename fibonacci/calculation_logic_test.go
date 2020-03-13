@@ -10,9 +10,9 @@ func TestNewFiboGeneratorSequential(t *testing.T) {
 	fiboGenerator := NewFiboGenerator()
 	defer fiboGenerator.Close()
 	tests := []struct {
-		name string
-		args int
-		want string
+		name    string
+		args    int
+		want    string
 		wantErr error
 	}{
 		{"1", 1, "1", nil},
@@ -43,9 +43,9 @@ func TestNewFiboGeneratorParallel(t *testing.T) {
 		})
 
 	tests := []struct {
-		name string
-		args int
-		want string
+		name    string
+		args    int
+		want    string
 		wantErr error
 	}{
 		{"1", 1, "1", nil},
@@ -54,7 +54,6 @@ func TestNewFiboGeneratorParallel(t *testing.T) {
 		{"70", 70, "190392490709135", nil},
 		{"10", 10, "55", nil},
 	}
-
 
 	for _, test := range tests {
 		test := test
@@ -71,9 +70,9 @@ func TestNewFiboGeneratorPanicCase(t *testing.T) {
 	fiboGenerator := NewFiboGenerator()
 	defer fiboGenerator.Close()
 	tests := []struct {
-		name string
-		args int
-		want string
+		name    string
+		args    int
+		want    string
 		wantErr error
 	}{
 		{"-10", -10, "Nothing", nil},

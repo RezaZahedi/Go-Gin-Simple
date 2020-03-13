@@ -11,12 +11,13 @@ type FibonacciService struct {
 	FibonacciCalculator func(int) (string, error)
 }
 
-func ProvideFibonacciService() FibonacciService {
-	return FibonacciService{FibonacciCalculator: fibonacci.NewFiboGenerator().GenerateNumber}
+func ProvideFibonacciService() (FibonacciService, func() error) {
+	f := fibonacci.NewFiboGenerator()
+	fs := FibonacciService{FibonacciCalculator: f.GenerateNumber}
+	return fs, f.Close
 }
 
-
-func (f *FibonacciService)GetFibonacciAnswer(c *gin.Context) {
+func (f *FibonacciService) GetFibonacciAnswer(c *gin.Context) {
 	number, err := strconv.Atoi(c.PostForm("number"))
 	if err != nil {
 		c.Error(err)
